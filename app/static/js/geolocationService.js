@@ -76,12 +76,17 @@
 // }
 
 export function geolocateUser(onSuccess, onError) {
+    console.log('🌍 Starting geolocation...');
+    const geoStartTime = performance.now();
+    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
+                console.log(`📍 Geolocation obtained in ${(performance.now() - geoStartTime).toFixed(0)}ms`);
                 const { latitude, longitude } = position.coords;
                 
                 console.log('Sending coordinates:', { latitude, longitude });
+                const apiStartTime = performance.now();
                 
                 fetch('/api/geolocation_ephemeris', {
                     method: 'POST',
@@ -89,10 +94,12 @@ export function geolocateUser(onSuccess, onError) {
                     body: JSON.stringify({ latitude, longitude }),
                 })
                 .then((response) => {
+                    console.log(`📡 API response received in ${(performance.now() - apiStartTime).toFixed(0)}ms`);
                     console.log('Response status:', response.status);
                     return response.json();
                 })
                 .then((data) => {
+                    console.log(`📊 API data parsed in ${(performance.now() - apiStartTime).toFixed(0)}ms`);
                     console.log('Raw response data:', data);
                     // Log structure to understand what we're getting
                     console.log('Data keys:', Object.keys(data));
@@ -103,6 +110,7 @@ export function geolocateUser(onSuccess, onError) {
                         throw new Error('Invalid data structure - missing hour data');
                     }
                     
+                    console.log(`✅ Geolocation service complete in ${(performance.now() - geoStartTime).toFixed(0)}ms`);
                     if (onSuccess) onSuccess(data, latitude, longitude);
                 })
                 .catch((error) => {
@@ -111,8 +119,14 @@ export function geolocateUser(onSuccess, onError) {
                 });
             },
             (error) => {
+                console.log(`❌ Geolocation failed after ${(performance.now() - geoStartTime).toFixed(0)}ms: ${error.message}`);
                 console.error('Geolocation error:', error.message);
                 if (onError) onError(error);
+            },
+            {
+                enableHighAccuracy: true,   // Force fresh GPS reading
+                timeout: 15000,             // 15 second timeout
+                maximumAge: 0               // Don't use cached location - force fresh
             }
         );
     } else {

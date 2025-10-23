@@ -24,7 +24,7 @@ def filter_by_hour():
                 node_id = record["connectedNode"].get("uri")
                 if node_id and node_id not in added_node_uris:
                     added_node_uris.add(node_id)
-                    node_label = record["connectedNode"].get("hasName") or record["connectedNode"].get("label") or "Unnamed Node"
+                    node_label = record["connectedNode"].get("label") or "Unnamed Node"
                     node_description = record["connectedNode"].get("description", "")
                     node_type = record.get("connectedNodeLabels", [])
 
@@ -46,7 +46,7 @@ def filter_by_hour():
                     planet_id = record["planet"].get("uri")
                     if planet_id and planet_id not in added_node_uris:
                         added_node_uris.add(planet_id)
-                        planet_label = record["planet"].get("hasName") or record["planet"].get("label") or "Unnamed Planet"
+                        planet_label = record["planet"].get("label") or "Unnamed Planet"
                         planet_description = record["planet"].get("description", "")
                         planet_type = record.get("planetLabels", [])
 
@@ -68,7 +68,7 @@ def filter_by_hour():
         if hour_node and hour_node["uri"] not in added_node_uris:
             filtered_nodes.append({
                 "id": hour_node["uri"],
-                "label": hour_node.get("hasName") or "Hour",
+                "label": hour_node.get("label") or "Hour",
                 "description": hour_node.get("description", ""),
                 "type": ["Hour"]
             })

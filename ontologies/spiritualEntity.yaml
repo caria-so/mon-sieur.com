@@ -3,577 +3,384 @@
 #-------------------------
 classes:
   SpiritualEntity:
-    type: owl:Class
-    uri: monsieur:SpiritualEntity
-    label: SpiritualEntity
+    rdf:type: owl:Class
+    uri: "monsieur:SpiritualEntity"
+    label: "Spiritual Entity"
     description: "A class representing spiritual beings, including angels, demons, etc."
-    subClassOf: Entity
 
   Angel:
-    type: owl:Class
-    uri: monsieur:SpiritualEntity/Angel
-    label: Angel
-    description: "A subclass representing celestial beings."
-    subClassOf: SpiritualEntity
-    subclassProperties:
-      hasFunction:
-        type: xsd:string[]
-        default: []
-        description: "The specific functions of the angel."
-      hasRank:
-        type: xsd:string
-        default: "Unknown"
-        description: "The rank of the angel in celestial hierarchy."
+    rdf:type: owl:Class
+    uri: "monsieur:SpiritualEntity/Angel"
+    label: "Angel"
+    description: "A subclass representing celestial beings."  
+    subClassOf: monsieur:SpiritualEntity
 
   Demon:
-    type: owl:Class
-    uri: monsieur:SpiritualEntity/Demon
-    label: Demon
+    rdf:type: owl:Class
+    uri: "monsieur:SpiritualEntity/Demon"
+    label: "Demon"
     description: "A subclass representing infernal beings."
-    subClassOf: SpiritualEntity
-    subclassProperties:
-      hasFunction:
-        type: xsd:string[]
-        default: []
-        description: The specific function of the demon.
-      hasRank:
-        type: xsd:string
-        default: "Unknown"
-        description: "The rank of the demon in infernal hierarchy."
+    subClassOf: monsieur:SpiritualEntity
 
   Elemental:
-    type: owl:Class
-    uri: monsieur:SpiritualEntity/Elemental
-    label: Elemental
+    rdf:type: owl:Class
+    uri: "monsieur:SpiritualEntity/Elemental"
+    label: "Elemental"
     description: "A subclass representing elemental beings."
-    subClassOf: SpiritualEntity
+    subClassOf: monsieur:SpiritualEntity
 
   Intelligence:
-    type: owl:Class
-    uri: monsieur:SpiritualEntity/Intelligence
-    label: Intelligence
+    rdf:type: owl:Class
+    uri: "monsieur:SpiritualEntity/Intelligence"
+    label: "Intelligence"
     description: "A subclass representing intelligences."
-    subClassOf: SpiritualEntity
+    subClassOf: monsieur:SpiritualEntity
 
 instances:
   Gabriel:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Gabriel
-    label: Gabriel
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: "Gabriel"
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms:
-    subclassProperties:
-      hasFunction: []
-      hasRank: Archangel
-    analogyProperties:
-      hasAnalogyWith:
-        - targetEntity:
-            uri: monsieur:PlanetEntity/Moon
-            label: Moon
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:WeekDayEntity/Monday
-            label: Monday
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:ChemicalSubstanceEntity/Metal/Silver_0
-            label: Silver_0
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:ColorEntity/White
-            label: White
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-
-  Khamael:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Khamael
-    label: Khamael
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: Khamael
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: []
-    subclassProperties:
-      hasFunction: []
-      hasRank: Archangel
+    uri: "monsieur:SpiritualEntity/Angel/Gabriel"
+    label: "Gabriel"
+    rdf:type: Angel
+    description: "Archangel Gabriel, messenger of God and ruler of the Moon. Associated with dreams, intuition, and the subconscious."  
+    aliases: [
+      "Jibril",
+      "Gavriel",
+      "Strength of God"
+    ]
+    owl:ObjectProperty:
+      rules: 
+        - uri: "monsieur:CelestialObject/Planet/Moon"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:WeekDay/Monday"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+      is_analogous_to:
+        - uri: "monsieur:ChemicalSubstance/Metal/Silver_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/White"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Pole/Negative"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:FiveElement/Water_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
 
   Michael:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Michael
-    label: Michael
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: Michael
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms:
-    subclassProperties:
-      hasFunction: []
-      hasRank: Archangel
-    analogyProperties:
-      hasAnalogyWith:
-        - targetEntity:
-            uri: monsieur:PlanetEntity/Sun
-            label: Sun
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:WeekDayEntity/Sunday
-            label: Sunday
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:ChemicalSubstanceEntity/Metal/Gold_0
-            label: Gold_0
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:ColorEntity/Yellow
-            label: Yellow
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-     
-
-  Sadiqel:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Sadiqel
-    label: Sadiqel
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: "Sadiqel"
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: []
-    subclassProperties:
-      hasFunction: []
-      hasRank: Archangel
-
-  Haniel:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Haniel
-    label: Haniel
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: "Haniel"
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: []
-    subclassProperties:
-      hasFunction: []
-      hasRank: Archangel
-
-  Saphqiel:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Saphqiel
-    label: Saphquiel
-    description: "Angel."
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: Saphqiel
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: []
-    subclassProperties:
-      hasFunction: []
-      hasRank: Archangel
+    uri: "monsieur:SpiritualEntity/Angel/Michael"
+    label: "Michael"
+    rdf:type: Angel
+    description: "Archangel Michael, chief of the heavenly host and ruler of the Sun. Warrior angel of protection and divine will."
+    aliases: [
+      "Mikail",
+      "Who is like God",
+      "Prince of Light"
+    ]
+    owl:ObjectProperty:
+      rules: 
+        - uri: "monsieur:CelestialObject/Planet/Sun"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:WeekDay/Sunday"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+      is_analogous_to:
+        - uri: "monsieur:ChemicalSubstance/Metal/Gold_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/Yellow"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Pole/Positive"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:FiveElement/Fire_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
 
   Raphael:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Raphael
-    label: Raphael
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: Raphael
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: []
-    subclassProperties:
-      hasFunction: []
-      hasRank: Archangel
-    analogyProperties:
-      hasAnalogyWith:
-        - targetEntity:
-            uri: monsieur:PlanetEntity/Mercury
-            label: Mercury
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:WeekDayEntity/Wednesday
-            label: Wednesday
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:ChemicalSubstanceEntity/Metal/Mercury_0
-            label: Mercury_0
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:ColorEntity/Purple
-            label: Purple
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:ColorEntity/Multicolor
-            label: Multicolor
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-   
+    uri: "monsieur:SpiritualEntity/Angel/Raphael"
+    label: "Raphael"
+    rdf:type: Angel
+    description: "Archangel Raphael, divine healer and ruler of Mercury. Angel of healing, knowledge, and communication."
+    aliases: [
+      "Israfil",
+      "God Heals",     
+      "Medicine of God",
+    ]
+    owl:ObjectProperty:
+      rules: 
+        - uri: "monsieur:CelestialObject/Planet/Mercury"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:WeekDay/Wednesday"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+      is_analogous_to:
+        - uri: "monsieur:ChemicalSubstance/Metal/Mercury_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/Purple"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/Multicolor"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Pole/Negative"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:FiveElement/Air_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
 
   Samael:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Samael
-    label: Samael
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: Samael
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: []
-    subclassProperties:
-      hasFunction: []
-      hasRank: Angel
-    analogyProperties:
-      hasAnalogyWith:
-        - targetEntity:
-            uri: monsieur:PlanetEntity/Mars
-            label: Mars
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:WeekDayEntity/Tuesday
-            label: Tuesday
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:ChemicalSubstanceEntity/Metal/Iron_0
-            label: Iron_0
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:ColorEntity/Red
-            label: Red
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-       
+    uri: "monsieur:SpiritualEntity/Angel/Samael"
+    label: "Samael"
+    rdf:type: Angel
+    description: "Archangel Samael, severity of God and ruler of Mars. Angel of divine justice, strength, and necessary destruction."
+    aliases:
+      ["Kamael",
+      "Chamuel",
+      "Venom of God",
+      "Severity of God",
+      ]
+    owl:ObjectProperty:
+      rules: 
+        - uri: "monsieur:CelestialObject/Planet/Mars"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:WeekDay/Tuesday"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+      is_analogous_to:
+        - uri: "monsieur:ChemicalSubstance/Metal/Iron_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/Red"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Pole/Positive"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:FiveElement/Fire_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
 
   Sachiel:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Sachiel
-    label: Sachiel
-    description: "Angel"
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: Sachiel
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: []
-    subclassProperties:
-      hasFunction: []
-      hasRank: Angel
-    analogyProperties:
-      hasAnalogyWith:
-
-        - targetEntity:
-            uri: monsieur:PlanetEntity/Jupiter
-            label: Jupiter
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:WeekDayEntity/Thursday
-            label: Thursday
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:ChemicalSubstanceEntity/Metal/Tin_0
-            label: Tin_0
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:ColorEntity/Blue
-            label: Blue
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-    
+    uri: "monsieur:SpiritualEntity/Angel/Sachiel"
+    label: "Sachiel"
+    rdf:type: Angel
+    description: "Archangel Sachiel, ruler of Jupiter. Angel of divine abundance, wisdom, and benevolent expansion."
+    aliases: [
+      "Zadkiel",
+      "Tzadkiel",
+      "Righteousness of God"
+    ]
+    owl:ObjectProperty:
+      rules: 
+        - uri: "monsieur:CelestialObject/Planet/Jupiter"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:WeekDay/Thursday"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+      is_analogous_to:
+        - uri: "monsieur:ChemicalSubstance/Metal/Tin_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/Blue"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Pole/Positive"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:FiveElement/Air_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:FiveElement/Air_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
 
   Anael:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Anael
-    label: Anael
-    description: "The angel ruler of Venus."
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: Anael
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: "ⲁⲛⲁⲛⲓⲏⲗ, Hananel, Aniel, Hanael, חַנִּיאֵל, أنانيال"
-    subclassProperties:
-      hasFunction: []
-      hasRank: Angel
-    analogyProperties:
-      hasAnalogyWith:
-
-        - targetEntity:
-            uri: monsieur:PlanetEntity/Venus
-            label: Venus
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:WeekDayEntity/Friday
-            label: Friday
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:ChemicalSubstanceEntity/Metal/Copper_0
-            label: Copper_0
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-
-        - targetEntity:
-            uri: monsieur:ColorEntity/Green
-            label: Green
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-   
+    uri: "monsieur:SpiritualEntity/Angel/Anael"
+    label: "Anael"
+    rdf:type: Angel
+    description: "Archangel Anael, ruler of Venus. Angel of love, beauty, harmony, and natural pleasures."    
+    aliases: [      
+      "Hanael",
+      "Haniel",
+      "Grace of God",
+      "Joy of God",
+    ]
+    owl:ObjectProperty:
+      rules: 
+        - uri: "monsieur:CelestialObject/Planet/Venus"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:WeekDay/Friday"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+      is_analogous_to:
+        - uri: "monsieur:ChemicalSubstance/Metal/Copper_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/Green"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
 
   Cassiel:
-    type: owl:Instance
-    uri: monsieur:SpiritualEntity/Angel/Cassiel
-    label: Cassiel
-    description: "The angel ruler of Saturn."
-    relationships:
-      - HAS_MEMBER: Angel
-    defaultProperties:
-      hasName: "Cassiel"
-      hasImage: "Image_URL_or_Description"
-      hasSynonyms: "Qafsiel, קַצְפִּיאֵל"
-    subclassProperties:
-      hasFunction: []
-      hasRank: Angel
-    analogyProperties:
-      hasAnalogyWith:
-        - targetEntity:
-            uri: monsieur:PlanetEntity/Saturn
-            label: Saturn
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-        - targetEntity:
-            uri: monsieur:WeekDayEntity/Saturday
-            label: Saturday
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
+    uri: "monsieur:SpiritualEntity/Angel/Cassiel"
+    label: "Cassiel"
+    rdf:type: Angel
+    description: "Archangel Cassiel, ruler of Saturn. Angel of solitude, discipline, time, and karmic lessons."   
+    aliases: [
+      "Kafziel",
+      "Tzaphkiel",   
+      "Speed of God",
+      "Contemplation of God",
+    ]
+    owl:ObjectProperty:
+      rules: 
+        - uri: "monsieur:CelestialObject/Planet/Saturn"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:WeekDay/Saturday"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+      is_analogous_to:
+        - uri: "monsieur:ChemicalSubstance/Metal/Lead_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Color/Black"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:Pole/Negative"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
+        - uri: "monsieur:FiveElement/Earth_0"
+          annotations:
+            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
+            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
+            hasConfidence: 0.8
 
-        - targetEntity:
-            uri: monsieur:ChemicalSubstanceEntity/Metal/Lead_0
-            label: Lead_0
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
+  # ADDITIONAL ANGELS
+  Khamael:
+    uri: "monsieur:SpiritualEntity/Angel/Khamael"
+    label: "Khamael"
+    rdf:type: Angel
+    description: "Angel of strength and courage, sometimes identified with Samael in Mars attributions."
+    aliases: [    
+      "Camael",
+      "Kemuel",
+      "He who sees God"
+    ]
+    owl:ObjectProperty:
+    
+  Tzadkiel:
+    uri: "monsieur:SpiritualEntity/Angel/Tzadkiel"
+    label: "Tzadkiel"
+    rdf:type: Angel
+    description: "Angel of mercy and benevolence, sometimes identified with Sachiel in Jupiter attributions."
+    aliases: [
+      "Zadkiel",
+      "Hesediel",
+      "Righteousness of God"
+    ]
+    owl:ObjectProperty:
 
-        - targetEntity:
-            uri: monsieur:ColorEntity/Black
-            label: Black
-          analogySystem:
-            uri: monsieur:AnalogySystemEntity/KeyOfSolomon
-            label: KeyOfSolomon
-          confidence:
-            score: 0.99
-            source_id: monsieur:WorkEntity/Print/ChiaveDiSalomone
-            quote_id: 
-            feed: "manual"
-      
-
-
-
+  Haniel:
+    uri: "monsieur:SpiritualEntity/Angel/Haniel"
+    label: "Haniel"
+    rdf:type: Angel
+    description: "Angel of joy and pleasure, sometimes identified with Anael in Venus attributions."  
+    aliases: [
+      "Anael",
+      "Hanael",
+      "Glory of God"
+    ]
+    owl:ObjectProperty:

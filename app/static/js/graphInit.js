@@ -10,11 +10,11 @@
 export const nodeFilters = {
     // List of node patterns to exclude from visualization
     excludedPatterns: [
-        'MagicHourEntity',
-        'PlanetEntity',
-        'WeekDayEntity',
+        'MagicHour',
+        'Planet',
+        'WeekDay',
         'SpiritualEntity',
-        'ChemicalSubstanceEntity'
+        'ChemicalSubstance'
     ],
 
     /**
@@ -114,16 +114,23 @@ export function initializeNetwork(nodes = [], edges = []) {
  */
 
 export function loadFullGraph() {
+    console.log('🚀 Starting loadFullGraph...');
+    const startTime = performance.now();
+    
     fetch('/api/graph_data')
-        .then((response) => response.json())
+        .then((response) => {
+            console.log(`📡 Graph data fetched in ${(performance.now() - startTime).toFixed(0)}ms`);
+            return response.json();
+        })
         .then((data) => {
+            console.log(`📊 Graph data parsed in ${(performance.now() - startTime).toFixed(0)}ms`);
             if (!data.nodes || !data.edges) {
                 console.error('No graph data received:', data);
                 return;
             }
 
             // Exclude class nodes (e.g., "MagicHourEntity") and specific edges
-            const excludedNodeLabels = ['MagicHourEntity'];
+            const excludedNodeLabels = ['MagicHour'];
             const excludedEdgeLabels = ['IS_PART_OF_DAY', 'HOUR_RULED_BY'];
 
             const nodes = new vis.DataSet(data.nodes.filter(node => {
@@ -145,7 +152,13 @@ export function loadFullGraph() {
                 label: '', // Hide edge labels in default view
             })));
 
+            console.log(`🔧 About to initialize network with ${nodes.length} nodes, ${edges.length} edges...`);
+            const networkStartTime = performance.now();
+            
             window.network = initializeNetwork(nodes, edges);
+            
+            console.log(`✅ Network initialized in ${(performance.now() - networkStartTime).toFixed(0)}ms`);
+            console.log(`🏁 Total loadFullGraph time: ${(performance.now() - startTime).toFixed(0)}ms`);
         })
         .catch((error) => console.error('Error fetching graph data:', error));
 }

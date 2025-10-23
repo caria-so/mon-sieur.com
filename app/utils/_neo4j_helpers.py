@@ -1,12 +1,26 @@
 
 from neo4j import GraphDatabase
+from dotenv import load_dotenv
+import os
 
-# Neo4j Driver Initialization
-NEO4J_URI = "neo4j+s://eb32f100.databases.neo4j.io"  
-NEO4J_USER = "neo4j"               
-NEO4J_PASSWORD = "DGXWFgCX7QiAMLk-6ZSJs7ZZwGN7PM1Ps7F6Jh6-eGw"            
+# Load environment variables
+load_dotenv()
 
-neo4j_driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+# Neo4j Driver Initialization from environment variables
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USER = os.getenv("NEO4J_USER") or os.getenv("NEO4J_USERNAME")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+
+if not NEO4J_URI or not NEO4J_USER or not NEO4J_PASSWORD:
+    raise ValueError("Neo4j connection details are missing in the environment variables.")
+
+neo4j_driver = GraphDatabase.driver(
+    NEO4J_URI, 
+    auth=(NEO4J_USER, NEO4J_PASSWORD),
+    max_connection_pool_size=10,
+    connection_timeout=30,
+    max_transaction_retry_time=15
+)
 
 
 def format_hour_name(hour_index, day_segment, weekday_name):

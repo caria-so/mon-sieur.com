@@ -27,12 +27,18 @@ def handle_geolocation_and_visualization():
             longitude=data['longitude']
         )
         hour_index = calculator.calculate_planetary_hour()
+        
+        # Get hour ruler directly from calculator
+        hour_ruler = calculator.get_hour_ruler()
+        dataset["additional_info"]["hour_ruler"] = hour_ruler
+        
+        # Get Neo4j data
         neo4j = Neo4jQueries(calculator)
         hour_name = neo4j.format_hour_name(hour_index)
         neo4j_data = neo4j.fetch_hour_data(hour_name, dataset)
-
-        if neo4j_data.get("hour_ruler"):
-            dataset["additional_info"]["hour_ruler"] = neo4j_data["hour_ruler"]
+        
+        # Ensure hour_ruler is in neo4j_data too
+        neo4j_data["hour_ruler"] = hour_ruler
 
         
         # Calculate visualization data

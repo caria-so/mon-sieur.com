@@ -85,6 +85,11 @@ export const chatHandler = {
                     const terminalOutput = document.getElementById('terminalOutput');
                     terminalOutputHandler.textContent += '> Could not fetch geolocation.\n';
                     terminalOutputHandler.scrollTop = terminalOutputHandler.scrollHeight;
+                },
+                {
+                    enableHighAccuracy: true,   // Force fresh GPS reading
+                    timeout: 15000,             // 15 second timeout
+                    maximumAge: 0               // Don't use cached location - force fresh
                 }
             );
             return 'Processing current hour...'; // Immediate response

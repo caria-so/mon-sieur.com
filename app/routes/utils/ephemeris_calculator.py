@@ -205,6 +205,31 @@ class EphemerisCalculator:
         day_index = self.now_local.weekday()
         return DAY_RULERS[day_index]
 
+    def get_hour_ruler(self):
+        """
+        Calculate the ruling planet of the current planetary hour.
+        
+        Returns:
+            str: The ruling planet of the current hour.
+        """
+        hour_index = self.calculate_planetary_hour()
+        day_ruler = self.get_day_ruler()
+        
+        # Find the starting position of the day ruler in the planetary sequence
+        planetary_order = ['Sun', 'Venus', 'Mercury', 'Moon', 'Saturn', 'Jupiter', 'Mars']
+        day_ruler_index = planetary_order.index(day_ruler)
+        
+        # Calculate the hour ruler based on hour index
+        # Hour 1 (day) or -1 (night) = day ruler
+        # Each subsequent hour moves to the next planet in the sequence
+        if hour_index > 0:  # Daytime hours (1-12)
+            hour_offset = (hour_index - 1) % 7
+        else:  # Nighttime hours (-1 to -12)
+            hour_offset = (abs(hour_index) - 1) % 7
+            
+        ruler_index = (day_ruler_index + hour_offset) % 7
+        return planetary_order[ruler_index]
+
 
     def calculate_planetary_positions(self):
         """

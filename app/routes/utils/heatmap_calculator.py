@@ -365,8 +365,8 @@ class HeatmapCalculator:
                 is_out_of_bounds = position.get("is_out_of_bounds", False)
 
                 # Determine if the current planet is ruling or day ruling
-                is_ruling_planet = planet_name.lower() == hour_ruler.lower()
-                is_day_ruling_planet = planet_name.lower() == day_ruling_planet.lower()
+                is_ruling_planet = hour_ruler and planet_name.lower() == hour_ruler.lower()
+                is_day_ruling_planet = day_ruling_planet and planet_name.lower() == day_ruling_planet.lower()
 
                 # Combustion and cazimi data
                 combustion_data = HeatmapCalculator.calculate_combustion_cazimi_modifier(position)

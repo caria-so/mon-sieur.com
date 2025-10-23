@@ -1,4 +1,4 @@
-from app.routes.constants import neo4j_driver
+from app.utils._neo4j_helpers import neo4j_driver
 from app.routes.utils.ephemeris_calculator import EphemerisCalculator
 from app.routes.constants import ORDINAL_NAMES
 
@@ -25,15 +25,15 @@ class Neo4jQueries:
         if not self.ephemeris_calculator:
             raise ValueError("EphemerisCalculator is required to format hour names.")
         
-        # Use absolute value to get the ordinal name (converts -4 to 4th, etc)
-        ordinal_idx = abs(hour_index)
+        # Use absolute value to get the hour number
+        hour_num = abs(hour_index)
         # Use sign to determine day/night (negative becomes Night)
         day_segment = 'Day' if hour_index > 0 else 'Night'
         weekday = self.ephemeris_calculator.now_local.strftime('%A')
         
-        # This creates URIs like "Hour_4th_Of_Night_Wednesday" from -4
-        # or "Hour_4th_Of_Day_Wednesday" from 4
-        return f"Hour_{ORDINAL_NAMES[ordinal_idx - 1]}_Of_{day_segment}_{weekday}"
+        # This creates URIs like "Hour_4_Night_Wednesday" from -4
+        # or "Hour_4_Day_Wednesday" from 4 (matching our database format)
+        return f"Hour_{hour_num}_{day_segment}_{weekday}"
     
 
     def fetch_hour_data(self, hour_name, planetary_positions):
@@ -42,7 +42,7 @@ class Neo4jQueries:
         """
         with self.driver.session() as session:
             query = f"""
-            MATCH (hour {{uri: "monsieur:MagicHourEntity/{hour_name}"}})
+            MATCH (hour {{uri: "monsieur:MagicHour/{hour_name}"}})
             OPTIONAL MATCH (hour)-[r]-(connectedNode)
             RETURN 
                 hour,
@@ -62,21 +62,20 @@ class Neo4jQueries:
             for record in results:
                 if not simplified["hour"]:
                     simplified["hour"] = {
-                        "label": record["hour"].get("hasName") or record["hour"].get("label"),
+                        "label": record["hour"].get("label"),
                         "description": record["hour"].get("description"),
                         "uri": record["hour"].get("uri"),
                         **planetary_positions
                     }
 
-                if record.get("relationshipType") == "HAS_MEMBER":
-                    continue
+                # if record.get("relationshipType") == "HAS_MEMBER":
+                #     continue
 
                 if record.get("connectedNode"):
                     connection = {
                         "relationshipType": record["relationshipType"],
                         "targetNode": {
-                            "label": (record["connectedNode"].get("hasName") or 
-                                      record["connectedNode"].get("label") or 
+                            "label": (record["connectedNode"].get("label") or 
                                       record["connectedNode"].get("description") or 
                                       record["connectedNode"].get("uri")),
                             "description": record["connectedNode"].get("description"),
@@ -87,8 +86,8 @@ class Neo4jQueries:
                     }
                     simplified["connections"].append(connection)
                     
-                    # Extract hour ruling planet from HOURS_RULED_BY relationship
-                    if connection["relationshipType"] == "HOURS_RULED_BY" and "PlanetEntity" in connection["targetNode"]["uri"]:
+                    # Extract hour ruling planet from HOUR_RULED_BY relationship
+                    if connection["relationshipType"] == "HOUR_RULED_BY" and connection["targetNode"]["label"] in ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]:
                         simplified["hour_ruler"] = connection["targetNode"]["label"]
 
             return simplified
@@ -97,23 +96,24 @@ class Neo4jQueries:
     def fetch_hour_graph(self, hour_name):
         """
         Fetch hour-related network graph data for visualization.
+        Shows the hour and ALL connected entities through any relationship,
+        including planets, colors, metals, angels, etc.
         """
         with self.driver.session() as session:
             query = """
             MATCH (hour {uri: $hour_uri})
             OPTIONAL MATCH (hour)-[r1]-(connectedNode)
-            OPTIONAL MATCH (connectedNode)-[r2]-(planet)
-            WHERE 'PlanetEntity' IN labels(connectedNode)
+            OPTIONAL MATCH (connectedNode)-[r2:HAS_ANALOGY_WITH]-(analogyNode)
             RETURN 
-                hour { .uri, .hasName, .description, .hasSynonyms } AS hour,
+                hour { .uri, .label, .description, .aliases } AS hour,
                 type(r1) AS hourRelationshipType,
                 connectedNode { .* } AS connectedNode,
                 properties(r1) AS hourRelationshipProperties,
                 labels(connectedNode) AS connectedNodeLabels,
-                planet { .* } AS planet,
+                analogyNode { .* } AS planet,
                 type(r2) AS planetRelationshipType,
                 properties(r2) AS planetRelationshipProperties,
-                labels(planet) AS planetLabels
+                labels(analogyNode) AS planetLabels
             """
             results = session.run(query, hour_uri=hour_name)
             return [record.data() for record in results]

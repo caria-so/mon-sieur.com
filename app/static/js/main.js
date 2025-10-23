@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Fetch geolocation and planetary hour data
+    console.log('🎯 About to call geolocateUser...');
     geolocateUser(
         (data, latitude, longitude) => {
             observerLocation = { latitude, longitude };

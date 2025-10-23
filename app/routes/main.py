@@ -27,7 +27,7 @@ def get_graph_data():
 
             for node in [node1, node2]:
                 if node.id not in nodes:
-                    label = node.get("label") or node.get("hasName") or node.get("uri")
+                    label = node.get("label") or node.get("uri")
                     nodes[node.id] = {
                         "id": node.id,
                         "label": label,

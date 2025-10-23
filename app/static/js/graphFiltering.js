@@ -46,7 +46,7 @@ function filterByHour(hourName) {
             console.log('Filtered Data Received:', data);
             
             // Only exclude the MagicHourEntity class, but keep the specific hour node
-            const excludedNodeLabels = ['MagicHourEntity'];
+            const excludedNodeLabels = ['MagicHour'];
             const excludedEdgeLabels = ['HAS_MEMBER']; // We don't want to show the class membership edge
 
             // Filter and create nodes

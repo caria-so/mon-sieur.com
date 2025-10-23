@@ -3,18 +3,18 @@ from neo4j import GraphDatabase
 from dotenv import load_dotenv
 import os
 
-from app.routes import graph
-
-
-# Load environment variables from .env
+# Load environment variables from .env FIRST
 load_dotenv()
+
+# Now safe to import modules that need env vars
+from app.routes import graph
 
 def create_app():
     app = Flask(__name__)
 
     # Fetch Neo4j credentials from environment variables
     NEO4J_URI = os.getenv("NEO4J_URI")
-    NEO4J_USER = os.getenv("NEO4J_USER")
+    NEO4J_USER = os.getenv("NEO4J_USER") or os.getenv("NEO4J_USERNAME")
     NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 
     # Ensure Neo4j credentials are loaded
@@ -38,7 +38,6 @@ def create_app():
     
 
     with app.app_context():
-        from app import models
         from app.routes import main, geolocate, ephemeris, graph
        
 
@@ -58,6 +57,7 @@ def create_app():
         
         from app.routes.chart import chart_routes
         app.register_blueprint(chart_routes)
+        print("Chart routes registered.")
 
 
     return app
