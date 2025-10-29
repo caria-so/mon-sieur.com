@@ -19,12 +19,48 @@
 
 
 
-export function fetchCurrentHourAndFilter(data) {
-    // console.log('Raw hour data:', data);
+// Global variable to store node class colors
+let nodeClassColors = {};
+
+// Function to fetch and cache node class colors from backend
+async function loadNodeClassColors() {
+    if (Object.keys(nodeClassColors).length === 0) {
+        try {
+            const response = await fetch('/api/node_colors');
+            if (response.ok) {
+                nodeClassColors = await response.json();
+                console.log('Node class colors loaded:', Object.keys(nodeClassColors).length, 'classes');
+            } else {
+                console.error('Failed to load node class colors');
+            }
+        } catch (error) {
+            console.error('Error loading node class colors:', error);
+        }
+    }
+}
+
+// Function to get color for a node class
+function getNodeColorByClass(nodeClass) {
+    const classColor = nodeClassColors[nodeClass];
+    if (classColor) {
+        return classColor;
+    }
+    
+    // Return default color if class not found
+    return nodeClassColors['Default'] || { background: '#D3D3D3', border: '#A9A9A9' };
+}
+
+export async function fetchCurrentHourAndFilter(data) {
+    console.log('Raw hour data:', data);
     if (!data.neo4j_data || !data.neo4j_data.hour) {
         throw new Error('Missing hour data in response');
     }
+    
+    // Load node class colors before filtering
+    await loadNodeClassColors();
+    
     const currentHourUri = data.neo4j_data.hour.uri;
+    console.log('Current hour URI for filtering:', currentHourUri);
     filterByHour(currentHourUri);
 }
 
@@ -47,22 +83,52 @@ function filterByHour(hourName) {
             
             // Only exclude the MagicHourEntity class, but keep the specific hour node
             const excludedNodeLabels = ['MagicHour'];
-            const excludedEdgeLabels = ['HAS_MEMBER']; // We don't want to show the class membership edge
+            const excludedEdgeLabels = []; // Add edge types to exclude if needed
 
-            // Filter and create nodes
+            // Filter and create nodes with class-based coloring
             const filteredNodes = new vis.DataSet(data.nodes
                 .filter(node => !excludedNodeLabels.includes(node.label))
                 .map(node => {
-                    const isHourNode = node.id === hourName;
+                    const isCurrentHour = node.id === hourName;
+                    
+                    // Get node class (first label)
+                    const nodeClass = node.type && node.type.length > 0 ? node.type[0] : 'Default';
+                    
+                    // Check if this is a magic hour node (but not the current one)
+                    const isMagicHour = nodeClass === 'MagicHour' || (node.type && node.type.includes('MagicHour'));
+                    const isOtherMagicHour = isMagicHour && !isCurrentHour;
+                    
+                    // Get color from class-based color scheme
+                    let color = getNodeColorByClass(nodeClass);
+                    let size = 20;
+                    
+                    // Special highlighting for current hour
+                    if (isCurrentHour) {
+                        color = { background: '#FFD700', border: '#DAA520' }; // Gold highlight
+                        size = 25;
+                    } else if (isOtherMagicHour) {
+                        // Gray out other magic hours - much more subdued
+                        color = { background: '#F5F5F5', border: '#CCCCCC' };
+                        size = 14; // Much smaller
+                    } else {
+                        // Slightly larger for important classes
+                        if (['Planet', 'Angel', 'Demon'].includes(nodeClass)) {
+                            size = 22;
+                        }
+                    }
+                    
                     return {
                         id: node.id,
                         label: node.label || 'Unnamed Node',
-                        title: node.description || 'No description',
-                        color: { 
-                            background: isHourNode ? '#FFD700' : '#90EE90',
-                            border: isHourNode ? '#DAA520' : '#006400'
-                        },
-                        size: isHourNode ? 25 : 20
+                        title: `${nodeClass}: ${node.description || 'No description'}`,
+                        color: color,
+                        size: size,
+                        opacity: isOtherMagicHour ? 0.4 : 1.0, // Make other magic hours semi-transparent
+                        font: isOtherMagicHour ? {
+                            color: '#BBBBBB',  // Very light gray text
+                            size: 10,          // Smaller font
+                            strokeWidth: 0     // No outline
+                        } : undefined
                     };
                 }));
 
@@ -70,39 +136,70 @@ function filterByHour(hourName) {
             // Filter and create edges
             const filteredEdges = new vis.DataSet(data.edges
                 .filter(edge => !excludedEdgeLabels.includes(edge.label)) // Filter out unwanted edges
-                .map(edge => ({
-                    from: edge.from,
-                    to: edge.to,
-                    label: edge.label,
-                    title: JSON.stringify(edge.properties, null, 2), // Show properties on hover
-                    arrows: {
-                        to: {
+                .map(edge => {
+                    // Check if edge connects to other magic hours
+                    const fromNode = data.nodes.find(n => n.id === edge.from);
+                    const toNode = data.nodes.find(n => n.id === edge.to);
+                    
+                    const fromIsMagicHour = fromNode && (fromNode.type && fromNode.type.includes('MagicHour'));
+                    const toIsMagicHour = toNode && (toNode.type && toNode.type.includes('MagicHour'));
+                    const fromIsCurrentHour = edge.from === hourName;
+                    const toIsCurrentHour = edge.to === hourName;
+                    
+                    // Gray out edges connected to non-current magic hours
+                    const isConnectedToOtherMagicHour = (fromIsMagicHour && !fromIsCurrentHour) || (toIsMagicHour && !toIsCurrentHour);
+                    
+                    return {
+                        from: edge.from,
+                        to: edge.to,
+                        label: edge.label,
+                        title: JSON.stringify(edge.properties, null, 2), // Show properties on hover
+                        arrows: {
+                            to: {
+                                enabled: true,
+                                scaleFactor: 0.5  // Smaller arrows
+                            }
+                        },
+                        font: {
+                            size: 10,      // Smaller font size
+                            color: isConnectedToOtherMagicHour ? '#CCC' : '#666', // Lighter color for grayed edges
+                            face: 'arial', // Regular font
+                            strokeWidth: 0, // No text outline
+                            align: 'middle',  // Can be 'horizontal' or 'middle'
+                            vadjust: 0,         // Adjust vertical position of the label
+                            background: 'white',
+                            backgroundPadding: { top: 2, right: 2, bottom: 2, left: 2 } 
+                        },
+                        color: { 
+                            color: isConnectedToOtherMagicHour ? '#E0E0E0' : '#006400', 
+                            opacity: isConnectedToOtherMagicHour ? 0.3 : 0.6 
+                        },
+                        width: isConnectedToOtherMagicHour ? 0.5 : 1,         // Thinner lines for grayed edges
+                        smooth: {
                             enabled: true,
-                            scaleFactor: 0.5  // Smaller arrows
+                            type: 'continuous',
+                            roundness: 0.5
                         }
-                    },
-                    font: {
-                        size: 10,      // Smaller font size
-                        color: '#666', // Subtle grey color
-                        face: 'arial', // Regular font
-                        strokeWidth: 0, // No text outline
-                        align: 'middle',  // Can be 'horizontal' or 'middle'
-                        vadjust: 0,         // Adjust vertical position of the label
-                        background: 'white',
-                        backgroundPadding: { top: 2, right: 2, bottom: 2, left: 2 } 
-                    },
-                    color: { color: '#006400', opacity: 0.6 }, // Keep your green but make it more transparent
-                    width: 1,         // Thinner lines
-                    smooth: {
-                        enabled: true,
-                        type: 'continuous',
-                        roundness: 0.5
-                    }
-                })));
+                    };
+                }));
 
-            console.log('Filtered edges:', filteredEdges);
+            console.log('Filtered nodes count:', filteredNodes.length);
+            console.log('Filtered edges count:', filteredEdges.length);
+            console.log('Sample nodes:', filteredNodes.get().slice(0, 3));
+            console.log('Sample edges:', filteredEdges.get().slice(0, 3));
 
-            // Create a new network with filtered data
+            // Update existing network instead of creating new one
+            if (window.network) {
+                window.network.setData({
+                    nodes: filteredNodes,
+                    edges: filteredEdges
+                });
+                window.network.fit();
+                console.log('Updated existing network with filtered data');
+                return;
+            }
+
+            // Create a new network only if one doesn't exist
             const container = document.getElementById('network');
             const options = {
                 layout: { improvedLayout: false },
@@ -110,7 +207,7 @@ function filterByHour(hourName) {
                     enabled: true,
                     solver: 'forceAtlas2Based',
                     forceAtlas2Based: {
-                        gravitationalConstant: -25,     // Reduced from -50 for less repulsion
+                        gravitationalConstant: -150,     // Reduced from -50 for less repulsion
                         centralGravity: 0.005,          // Reduced from 0.01 for gentler center pull
                         springLength: 200,              // Keep the desired distance
                         springConstant: 0.02,           // Reduced from 0.08 for softer springs
@@ -132,6 +229,17 @@ function filterByHour(hourName) {
                 nodes: filteredNodes, 
                 edges: filteredEdges 
             }, options);
+
+            // Add click event handler for showing node details
+            window.network.on('click', function(params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0];
+                    const node = filteredNodes.get(nodeId);
+                    if (node && window.showNodeDetails) {
+                        window.showNodeDetails(node);
+                    }
+                }
+            });
 
             window.network.fit();
             console.log('Network Updated with Filtered Data');

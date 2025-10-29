@@ -95,6 +95,74 @@
           </div>
       </div>
 
+      <!-- Node Details Offcanvas -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="nodeDetailsOffcanvas" aria-labelledby="nodeDetailsOffcanvasLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="nodeDetailsOffcanvasLabel">Node Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <!-- Node Information Section -->
+          <div id="nodeInfoSection">
+            <h6 class="text-muted mb-3">Node Information</h6>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6 class="card-title" id="nodeLabel">Node Label</h6>
+                <p class="card-text" id="nodeDescription">Node description will appear here...</p>
+                <div class="row">
+                  <div class="col-6">
+                    <small class="text-muted">Type:</small>
+                    <div id="nodeType" class="fw-bold">-</div>
+                  </div>
+                  <div class="col-6">
+                    <small class="text-muted">URI:</small>
+                    <div id="nodeUri" class="fw-bold small">-</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Relationships Section -->
+          <div id="relationshipsSection">
+            <h6 class="text-muted mb-3">Relationships</h6>
+            <div id="relationshipsList" class="mb-3">
+              <!-- Relationships will be populated here -->
+            </div>
+          </div>
+
+          <!-- Add Relationship Section -->
+          <div id="addRelationshipSection">
+            <h6 class="text-muted mb-3">Add New Relationship</h6>
+            <form id="addRelationshipForm">
+              <div class="mb-3">
+                <label for="relationshipType" class="form-label">Relationship Type</label>
+                <select class="form-select" id="relationshipType" required>
+                  <option value="">Select relationship type...</option>
+                  <option value="HAS_ANALOGY_WITH">Has Analogy With</option>
+                  <option value="RULES">Rules</option>
+                  <option value="INFLUENCES">Influences</option>
+                  <option value="CORRESPONDS_TO">Corresponds To</option>
+                  <option value="IS_PART_OF">Is Part Of</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="targetNode" class="form-label">Target Node</label>
+                <input type="text" class="form-control" id="targetNode" placeholder="Search for target node..." required>
+                <div id="nodeSearchResults" class="list-group mt-2" style="display: none;">
+                  <!-- Search results will appear here -->
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="relationshipDescription" class="form-label">Description (optional)</label>
+                <textarea class="form-control" id="relationshipDescription" rows="2" placeholder="Add a description for this relationship..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Add Relationship</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 
@@ -116,6 +184,7 @@
     <script type="module" src="/static/js/main.js"></script>
 
 
+    <script src="/static/js/nodeDetails.js"></script>
     </body>
 </html>
 

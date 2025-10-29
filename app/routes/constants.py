@@ -211,3 +211,55 @@ PLANET_DIAMETERS = {
     'Pluto': 2376,
     'Moon': 3475
 }
+
+# Node class colors for graph visualization
+NODE_CLASS_COLORS = {
+    # Celestial & Time
+    'Planet': {'background': '#FF6B6B', 'border': '#E55555'},           # Red
+    'MagicHour': {'background': '#FFD700', 'border': '#DAA520'},        # Gold
+    'WeekDay': {'background': '#FFA500', 'border': '#FF8C00'},          # Orange
+    'Season': {'background': '#98FB98', 'border': '#90EE90'},           # Light Green
+    'ZodiacalSign': {'background': '#DDA0DD', 'border': '#DA70D6'},     # Plum
+    
+    # Spiritual Entities  
+    'Angel': {'background': '#87CEEB', 'border': '#4682B4'},            # Sky Blue
+    'Demon': {'background': '#8B0000', 'border': '#660000'},            # Dark Red
+    'Elemental': {'background': '#20B2AA', 'border': '#008B8B'},        # Light Sea Green
+    'Intelligence': {'background': '#9370DB', 'border': '#8A2BE2'},     # Blue Violet
+    
+    # Material & Physical
+    'Metal': {'background': '#C0C0C0', 'border': '#A9A9A9'},            # Silver
+    'Color': {'background': '#FF69B4', 'border': '#FF1493'},            # Hot Pink
+    'BasicElement': {'background': '#32CD32', 'border': '#228B22'},     # Lime Green
+    'BasicQuality': {'background': '#F0E68C', 'border': '#DAA520'},     # Khaki
+    'Mineral': {'background': '#8B7355', 'border': '#704214'},          # Brown
+    'Plant': {'background': '#00FF7F', 'border': '#00FA9A'},            # Spring Green
+    'Animal': {'background': '#D2B48C', 'border': '#CD853F'},           # Tan
+    
+    # Medical & Biological
+    'AnatomicalPart': {'background': '#FFB6C1', 'border': '#FF69B4'},   # Light Pink
+    'Pathology': {'background': '#FF4500', 'border': '#FF0000'},        # Red Orange
+    'Physiology': {'background': '#ADFF2F', 'border': '#9ACD32'},       # Green Yellow
+    'Temperament': {'background': '#DEB887', 'border': '#CD853F'},      # Burlywood
+    'PsychologicalState': {'background': '#B19CD9', 'border': '#9370DB'}, # Light Purple
+    
+    # Abstract & Symbolic
+    'MusicalNote': {'background': '#FFE4E1', 'border': '#FFC0CB'},      # Misty Rose
+    'NumericalValue': {'background': '#E0E0E0', 'border': '#C0C0C0'},   # Light Gray
+    'Sigil': {'background': '#2F4F4F', 'border': '#696969'},            # Dark Slate Gray
+    'Symbol': {'background': '#708090', 'border': '#2F4F4F'},           # Slate Gray
+    'AlphabeticalValue': {'background': '#F5DEB3', 'border': '#D2B48C'}, # Wheat
+    'HebrewLetter': {'background': '#FFEFD5', 'border': '#DEB887'},     # Papaya Whip
+    'TarotCard': {'background': '#800080', 'border': '#4B0082'},        # Purple
+    'Rune': {'background': '#A0522D', 'border': '#8B4513'},             # Sienna
+    
+    # Systems & Evidence
+    'KnowledgeSystem': {'background': '#6495ED', 'border': '#4169E1'},  # Cornflower Blue
+    'Evidence': {'background': '#F4A460', 'border': '#CD853F'},         # Sandy Brown
+    'Organism': {'background': '#228B22', 'border': '#006400'},         # Forest Green
+    'Polarity': {'background': '#DC143C', 'border': '#B22222'},         # Crimson
+    'Genre': {'background': '#FF6347', 'border': '#FF4500'},            # Tomato
+    
+    # Default for unknown classes
+    'Default': {'background': '#D3D3D3', 'border': '#A9A9A9'}          # Light Gray
+}

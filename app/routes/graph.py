@@ -7,6 +7,8 @@ filter_viz_bp = Blueprint('filter_viz', __name__)
 def filter_by_hour():
     data = request.json
     hour_name = data.get('hour_name')
+    
+    print(f"🔍 Filtering by hour: {hour_name}")
 
     if not hour_name:
         return jsonify({"error": "Missing hour_name parameter"}), 400
@@ -14,6 +16,7 @@ def filter_by_hour():
     try:
         neo4j = Neo4jQueries()
         results = neo4j.fetch_hour_graph(hour_name)
+        print(f"📊 Query returned {len(results)} records")
 
         filtered_nodes = []
         filtered_edges = []
@@ -42,27 +45,30 @@ def filter_by_hour():
                     "properties": record.get("hourRelationshipProperties", {})
                 })
 
-                if record.get("planet"):
-                    planet_id = record["planet"].get("uri")
-                    if planet_id and planet_id not in added_node_uris:
-                        added_node_uris.add(planet_id)
-                        planet_label = record["planet"].get("label") or "Unnamed Planet"
-                        planet_description = record["planet"].get("description", "")
-                        planet_type = record.get("planetLabels", [])
+                # Handle second level nodes (used to be called "planet" but now includes all connected entities)
+                if record.get("secondLevelNode"):
+                    second_id = record["secondLevelNode"].get("uri")
+                    if second_id and second_id not in added_node_uris:
+                        added_node_uris.add(second_id)
+                        second_label = record["secondLevelNode"].get("label") or "Unnamed Node"
+                        second_description = record["secondLevelNode"].get("description", "")
+                        second_type = record.get("secondLevelLabels", [])
 
                         filtered_nodes.append({
-                            "id": planet_id,
-                            "label": planet_label,
-                            "description": planet_description,
-                            "type": planet_type
+                            "id": second_id,
+                            "label": second_label,
+                            "description": second_description,
+                            "type": second_type
                         })
 
-                    filtered_edges.append({
-                        "from": node_id,
-                        "to": planet_id,
-                        "label": record["planetRelationshipType"],
-                        "properties": record.get("planetRelationshipProperties", {})
-                    })
+                    # Add edge from connectedNode to secondLevelNode
+                    if record.get("secondRelationshipType"):
+                        filtered_edges.append({
+                            "from": node_id,
+                            "to": second_id,
+                            "label": record["secondRelationshipType"],
+                            "properties": record.get("secondRelationshipProperties", {})
+                        })
 
         hour_node = next((record["hour"] for record in results if record["hour"]), None)
         if hour_node and hour_node["uri"] not in added_node_uris:

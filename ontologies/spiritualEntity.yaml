@@ -7,34 +7,35 @@ classes:
     uri: "monsieur:SpiritualEntity"
     label: "Spiritual Entity"
     description: "A class representing spiritual beings, including angels, demons, etc."
+    rdfs:subClassOf: monsieur:Entity
 
   Angel:
     rdf:type: owl:Class
     uri: "monsieur:SpiritualEntity/Angel"
     label: "Angel"
     description: "A subclass representing celestial beings."  
-    subClassOf: monsieur:SpiritualEntity
+    rdfs:subClassOf: monsieur:SpiritualEntity
 
   Demon:
     rdf:type: owl:Class
     uri: "monsieur:SpiritualEntity/Demon"
     label: "Demon"
     description: "A subclass representing infernal beings."
-    subClassOf: monsieur:SpiritualEntity
+    rdfs:subClassOf: monsieur:SpiritualEntity
 
   Elemental:
     rdf:type: owl:Class
     uri: "monsieur:SpiritualEntity/Elemental"
     label: "Elemental"
     description: "A subclass representing elemental beings."
-    subClassOf: monsieur:SpiritualEntity
+    rdfs:subClassOf: monsieur:SpiritualEntity
 
   Intelligence:
     rdf:type: owl:Class
     uri: "monsieur:SpiritualEntity/Intelligence"
     label: "Intelligence"
     description: "A subclass representing intelligences."
-    subClassOf: monsieur:SpiritualEntity
+    rdfs:subClassOf: monsieur:SpiritualEntity
 
 instances:
   Gabriel:
@@ -47,39 +48,6 @@ instances:
       "Gavriel",
       "Strength of God"
     ]
-    owl:ObjectProperty:
-      rules: 
-        - uri: "monsieur:CelestialObject/Planet/Moon"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:WeekDay/Monday"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-      is_analogous_to:
-        - uri: "monsieur:ChemicalSubstance/Metal/Silver_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/White"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Pole/Negative"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:FiveElement/Water_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
 
   Michael:
     uri: "monsieur:SpiritualEntity/Angel/Michael"
@@ -91,39 +59,6 @@ instances:
       "Who is like God",
       "Prince of Light"
     ]
-    owl:ObjectProperty:
-      rules: 
-        - uri: "monsieur:CelestialObject/Planet/Sun"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:WeekDay/Sunday"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-      is_analogous_to:
-        - uri: "monsieur:ChemicalSubstance/Metal/Gold_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/Yellow"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Pole/Positive"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:FiveElement/Fire_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
 
   Raphael:
     uri: "monsieur:SpiritualEntity/Angel/Raphael"
@@ -135,44 +70,7 @@ instances:
       "God Heals",     
       "Medicine of God",
     ]
-    owl:ObjectProperty:
-      rules: 
-        - uri: "monsieur:CelestialObject/Planet/Mercury"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:WeekDay/Wednesday"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-      is_analogous_to:
-        - uri: "monsieur:ChemicalSubstance/Metal/Mercury_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/Purple"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/Multicolor"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Pole/Negative"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:FiveElement/Air_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
+    
 
   Samael:
     uri: "monsieur:SpiritualEntity/Angel/Samael"
@@ -185,39 +83,7 @@ instances:
       "Venom of God",
       "Severity of God",
       ]
-    owl:ObjectProperty:
-      rules: 
-        - uri: "monsieur:CelestialObject/Planet/Mars"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:WeekDay/Tuesday"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-      is_analogous_to:
-        - uri: "monsieur:ChemicalSubstance/Metal/Iron_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/Red"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Pole/Positive"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:FiveElement/Fire_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
+
 
   Sachiel:
     uri: "monsieur:SpiritualEntity/Angel/Sachiel"
@@ -229,44 +95,7 @@ instances:
       "Tzadkiel",
       "Righteousness of God"
     ]
-    owl:ObjectProperty:
-      rules: 
-        - uri: "monsieur:CelestialObject/Planet/Jupiter"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:WeekDay/Thursday"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-      is_analogous_to:
-        - uri: "monsieur:ChemicalSubstance/Metal/Tin_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/Blue"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Pole/Positive"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:FiveElement/Air_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:FiveElement/Air_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
+
 
   Anael:
     uri: "monsieur:SpiritualEntity/Angel/Anael"
@@ -279,29 +108,7 @@ instances:
       "Grace of God",
       "Joy of God",
     ]
-    owl:ObjectProperty:
-      rules: 
-        - uri: "monsieur:CelestialObject/Planet/Venus"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:WeekDay/Friday"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-      is_analogous_to:
-        - uri: "monsieur:ChemicalSubstance/Metal/Copper_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/Green"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
+ 
 
   Cassiel:
     uri: "monsieur:SpiritualEntity/Angel/Cassiel"
@@ -314,39 +121,6 @@ instances:
       "Speed of God",
       "Contemplation of God",
     ]
-    owl:ObjectProperty:
-      rules: 
-        - uri: "monsieur:CelestialObject/Planet/Saturn"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:WeekDay/Saturday"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-      is_analogous_to:
-        - uri: "monsieur:ChemicalSubstance/Metal/Lead_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Color/Black"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:Pole/Negative"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
-        - uri: "monsieur:FiveElement/Earth_0"
-          annotations:
-            hasEvidence: "monsieur:Evidence/TheKeyOfSolomon"
-            belongsToSystem: "monsieur:KnowledgeSystem/Solomonic"
-            hasConfidence: 0.8
 
   # ADDITIONAL ANGELS
   Khamael:
@@ -359,7 +133,7 @@ instances:
       "Kemuel",
       "He who sees God"
     ]
-    owl:ObjectProperty:
+
     
   Tzadkiel:
     uri: "monsieur:SpiritualEntity/Angel/Tzadkiel"
@@ -371,7 +145,7 @@ instances:
       "Hesediel",
       "Righteousness of God"
     ]
-    owl:ObjectProperty:
+
 
   Haniel:
     uri: "monsieur:SpiritualEntity/Angel/Haniel"
@@ -383,4 +157,3 @@ instances:
       "Hanael",
       "Glory of God"
     ]
-    owl:ObjectProperty:
