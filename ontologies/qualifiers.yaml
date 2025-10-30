@@ -1,0 +1,373 @@
+#============================================================================
+# QUALIFIER SPECIFICATIONS
+# Neo4j Relationship Properties for Correspondence Provenance
+#============================================================================
+
+# NOTE: Qualifiers are NOT part of the OWL ontology.
+# They are properties stored on Neo4j relationships to track provenance.
+# They do NOT appear in OWL exports but are essential for the application.
+
+#============================================================================
+# REQUIRED QUALIFIER FIELDS
+#============================================================================
+
+system:
+  type: array[string]
+  required: true
+  description: "Knowledge system(s) that attest this correspondence"
+  format: "Short name matching KnowledgeSystem instance label"
+  examples:
+    - ["Solomonic"]
+    - ["Hermetic", "GoldenDawn"]
+    - ["Agrippa", "RenaissanceMagic"]
+  notes: |
+    Use consistent naming matching your KnowledgeSystem instances.
+    Multiple systems indicate consensus across traditions.
+
+evidence:
+  type: string
+  required: true
+  description: "Source document identifier"
+  format: "Label/name of Evidence instance (not full URI)"
+  examples:
+    - "TheKeyOfSolomon"
+    - "CorpusHermeticum"
+    - "ThreeBooksOccultPhilosophy"
+  notes: |
+    Must match the label of an Evidence instance.
+    Used to look up external_uuid for OCR text retrieval.
+
+confidence:
+  type: float
+  required: true
+  range: [0.0, 1.0]
+  description: "Confidence level for this correspondence claim"
+  guidelines:
+    0.5-0.6: "Weak - mentioned briefly or unclear"
+    0.7-0.8: "Moderate - stated but not emphasized"
+    0.8-0.9: "Strong - clearly stated and discussed"
+    0.9-1.0: "Very strong - primary focus or tabular data"
+  examples:
+    - 0.75
+    - 0.85
+    - 0.95
+
+#============================================================================
+# CHARACTER OFFSET FIELDS (Choose One Format)
+#============================================================================
+
+# FORMAT A: Single Citation (Simple)
+# Use when correspondence is mentioned once in the source
+
+char_start:
+  type: integer
+  required: true (if not using 'citations')
+  description: "Character position where evidence begins in OCR text"
+  notes: "Zero-indexed offset from start of text file"
+  example: 15234
+
+char_end:
+  type: integer
+  required: true (if not using 'citations')
+  description: "Character position where evidence ends in OCR text"
+  notes: "Exclusive end position (standard string slicing)"
+  example: 15456
+
+# FORMAT B: Multiple Citations (Detailed)
+# Use when correspondence is mentioned multiple times in same source
+
+citations:
+  type: array[object]
+  required: true (if not using char_start/char_end)
+  description: "Multiple text citations from same source"
+  structure:
+    - char_start:
+        type: integer
+        required: true
+        description: "Start position of this citation"
+    
+    - char_end:
+        type: integer
+        required: true
+        description: "End position of this citation"
+    
+    - note:
+        type: string
+        required: false
+        description: "Context note for this specific citation"
+        examples:
+          - "Primary description"
+          - "Ritual table"
+          - "Book II reference"
+  
+  example:
+    citations:
+      - char_start: 45678
+        char_end: 46123
+        note: "Book I, Chapter 23"
+      
+      - char_start: 89234
+        char_end: 89567
+        note: "Book II, Chapter 8"
+
+#============================================================================
+# OPTIONAL QUALIFIER FIELDS
+#============================================================================
+
+note:
+  type: string
+  required: false
+  description: "Additional context, clarification, or commentary"
+  examples:
+    - "Primary martial color"
+    - "Used specifically in evocations"
+    - "Conflicting with some modern interpretations"
+
+page_reference:
+  type: string
+  required: false
+  description: "Human-readable page/section reference"
+  examples:
+    - "Book II, Chapter 3"
+    - "p. 45-47"
+    - "Table of Planetary Correspondences"
+    - "Libellus III, paragraph 12"
+
+book:
+  type: string
+  required: false
+  description: "Book number for multi-volume works"
+  examples:
+    - "Book I"
+    - "Book II"
+    - "Volume 3"
+
+chapter:
+  type: string or integer
+  required: false
+  description: "Chapter identifier"
+  examples:
+    - "Chapter 23"
+    - 23
+    - "Chapter XXIII"
+
+section:
+  type: string
+  required: false
+  description: "Section or subsection identifier"
+  examples:
+    - "Section 4.2"
+    - "Part III"
+
+scale:
+  type: string
+  required: false
+  description: "Specific scale for systems with variants"
+  usage: "Primarily for Golden Dawn color scales"
+  examples:
+    - "King Scale"
+    - "Queen Scale"
+    - "Prince Scale"
+    - "Princess Scale"
+
+table_reference:
+  type: string
+  required: false
+  description: "Reference to specific table or chart"
+  examples:
+    - "Table 2, Row 5"
+    - "Correspondence Table A"
+    - "Figure 3"
+
+context_snippet:
+  type: string
+  required: false
+  max_length: 500
+  description: "Brief text preview (optional, can be auto-generated)"
+  examples:
+    - "...Mars governs all things red and fiery..."
+    - "...the metal of Mars is iron, hot and dry..."
+  notes: |
+    Can be auto-generated by application from char offsets.
+    Useful for previews without fetching full text.
+
+#============================================================================
+# USAGE EXAMPLES
+#============================================================================
+
+example_simple_citation:
+  description: "Single mention in one source"
+  yaml: |
+    Mars:
+      COLOR_CORRESPONDENCE:
+        - uri: "monsieur:Color/Red"
+          qualifiers:
+            system: ["Solomonic"]
+            evidence: "TheKeyOfSolomon"
+            confidence: 0.85
+            char_start: 15234
+            char_end: 15456
+            note: "Primary martial color"
+
+example_multiple_citations:
+  description: "Multiple mentions in same source"
+  yaml: |
+    Mars:
+      COLOR_CORRESPONDENCE:
+        - uri: "monsieur:Color/Red"
+          qualifiers:
+            system: ["Agrippa"]
+            evidence: "ThreeBooksOccultPhilosophy"
+            confidence: 0.95
+            citations:
+              - char_start: 45678
+                char_end: 46123
+                note: "Book I, Chapter 23"
+              - char_start: 89234
+                char_end: 89567
+                note: "Book II ritual table"
+
+example_consensus:
+  description: "Multiple systems agreeing (separate entries)"
+  yaml: |
+    Mars:
+      METAL_CORRESPONDENCE:
+        # Entry 1: Solomonic source
+        - uri: "monsieur:Metal/Iron"
+          qualifiers:
+            system: ["Solomonic"]
+            evidence: "TheKeyOfSolomon"
+            confidence: 0.8
+            char_start: 12345
+            char_end: 12567
+        
+        # Entry 2: Hermetic source
+        - uri: "monsieur:Metal/Iron"
+          qualifiers:
+            system: ["Hermetic"]
+            evidence: "CorpusHermeticum"
+            confidence: 0.9
+            char_start: 6789
+            char_end: 6901
+
+example_conflict:
+  description: "Different systems, different correspondences"
+  yaml: |
+    Sun:
+      COLOR_CORRESPONDENCE:
+        # Most systems say Yellow
+        - uri: "monsieur:Color/Yellow"
+          qualifiers:
+            system: ["Solomonic"]
+            evidence: "TheKeyOfSolomon"
+            confidence: 0.85
+            char_start: 20123
+            char_end: 20345
+        
+        # But Golden Dawn says Gold
+        - uri: "monsieur:Color/Gold"
+          qualifiers:
+            system: ["GoldenDawn"]
+            evidence: "GoldenDawnColorScales"
+            confidence: 0.95
+            char_start: 3456
+            char_end: 3589
+            scale: "King Scale"
+
+#============================================================================
+# APPLICATION USAGE
+#============================================================================
+
+retrieval_flow:
+  description: "How application fetches source text"
+  steps:
+    1: "Query Neo4j relationship to get qualifiers"
+    2: "Extract 'evidence' field from qualifiers"
+    3: "Query Evidence node by label to get external_uuid"
+    4: "Pass external_uuid + char_start + char_end to OCR API"
+    5: "Retrieve and display text excerpt with highlighting"
+  
+  cypher_example: |
+    // Get correspondence with source info
+    MATCH (mars {label: "Mars"})-[r:COLOR_CORRESPONDENCE]->(color)
+    MATCH (evidence:Evidence {label: r.evidence})
+    RETURN {
+      color: color.label,
+      system: r.system,
+      confidence: r.confidence,
+      char_start: r.char_start,
+      char_end: r.char_end,
+      source_uuid: evidence.external_uuid,
+      source_title: evidence.label
+    }
+
+  python_example: |
+    # Fetch text excerpt
+    def get_source_text(evidence_label, char_start, char_end):
+        # 1. Get Evidence UUID
+        result = session.run(
+            "MATCH (e:Evidence {label: $label}) RETURN e.external_uuid as uuid",
+            label=evidence_label
+        )
+        uuid = result.single()["uuid"]
+        
+        # 2. Call OCR API with UUID + offsets
+        response = requests.get(
+            f"https://ocr-api.com/text/{uuid}",
+            params={"start": char_start, "end": char_end}
+        )
+        
+        return response.json()["excerpt"]
+
+#============================================================================
+# VALIDATION RULES
+#============================================================================
+
+validation_rules:
+  required_fields:
+    - "All correspondences MUST have: system, evidence, confidence"
+    - "All correspondences MUST have EITHER (char_start + char_end) OR citations array"
+  
+  system_validation:
+    - "Values in 'system' array MUST match existing KnowledgeSystem instance labels"
+    - "System names should be consistent across all correspondences"
+  
+  evidence_validation:
+    - "Value in 'evidence' MUST match an existing Evidence instance label"
+    - "Evidence instance MUST have external_uuid property"
+  
+  confidence_validation:
+    - "MUST be float between 0.0 and 1.0"
+    - "Should reflect strength of textual evidence"
+  
+  offset_validation:
+    - "char_start MUST be >= 0"
+    - "char_end MUST be > char_start"
+    - "Offsets should be valid for the referenced OCR text"
+    - "If using citations array, each citation MUST have char_start and char_end"
+
+#============================================================================
+# NOTES
+#============================================================================
+
+notes:
+  owl_compatibility: |
+    Qualifiers are NOT part of OWL/RDF standard.
+    They exist as Neo4j relationship properties only.
+    When exporting to OWL, either:
+    1. Use N-ary relations pattern (create intermediate nodes)
+    2. Omit qualifier data (keep only basic correspondences)
+    3. Store qualifiers as separate annotation file
+  
+  querying: |
+    Access qualifiers in Cypher using relationship properties:
+    MATCH (a)-[r:CORRESPONDENCE]->(b)
+    WHERE r.confidence > 0.8
+    RETURN r.system, r.evidence, r.char_start
+  
+  performance: |
+    Indexing relationship properties is not standard in Neo4j.
+    For frequent queries on qualifiers, consider:
+    1. Filtering on node properties first
+    2. Using relationship indexes (Neo4j 4.3+)
+    3. Caching frequently accessed qualifier data
