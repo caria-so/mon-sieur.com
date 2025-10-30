@@ -1,10 +1,13 @@
-# Monsieur.so
+# mon-sieur.com
 
-# Overview
-Monsieur.so is a web application that infuses astronomy and artificial intelligence into the three pillars of traditional knowledge: Astrology, Alchemy, and Magic.
+**Overview**
+*mon-sieur* is a web application that fuses astronomy and artificial intelligence with the three pillars of traditional knowledge: Astrology, Alchemy, and Magic.
+It gives practitioners a real-time map of the planetary energies active at their location. Given a goal, it mines a vast network of analogies—angels, demons, elementals, anatomical parts, plants, minerals, chemical substances, numbers, formulas, psalms, names of God, sefirot, tarot, geomancy, sigils, and more. Each is dynamically weighted by astronomical factors and returned as an interactive network—a canvas for designing rituals that truly resonate with the moment.
+Practitioners can then decide what to leverage and how to combine elements. 
+And more than just providing analogies, *mon-sieur( acts as a master (The name recalls Cornelius Agrippa’s legendary black dog, “Monsieur”). It can advise when not to proceed if conditions are wrong, and instead highlight the most auspicious circumstances to get any job done.
 
-## Core Functionality
-At its core, it’s an interactive knowledge graph that brings together astronomical calculations, astrological correspondences, and hermetic philosophy. Think of it as a digital implementation of traditional astrological and magical practices—reimagined through modern computational astronomy and graph database technology. 
+**Core Functionality**
+At its core, the application is an interactive knowledge graph that merges astronomical calculations, astrological correspondences, and hermetic philosophy. It serves as a digital reimagining of traditional astrological and magical practices, powered by computational astronomy and graph database technology.
 
 1. Astronomical & Astrological Calculations
 Real-time Planetary Positions: Calculates precise positions of all planets (including outer planets) using the Swiss Ephemeris and Skyfield libraries
@@ -77,6 +80,7 @@ This system essentially digitizes and makes accessible the complex web of corres
 ## Ephemeris Calculator - The NASA Data Engine
 
 The Ephemeris Calculator (ephemeris_calculator.py) is the astronomical computation engine that provides real-time, location-aware planetary data using NASA's JPL (Jet Propulsion Laboratory) ephemeris data.
+
 Core Functionality:
 
 ### A. Astronomical Calculations
@@ -129,7 +133,6 @@ The heatmap system creates radial gradients around each planet's position in the
 The system calculates planetary "influence intensity" using multiple weighted factors:
 
 1. Proximity Factor (15% weight)
-intensity
 
 2. Visibility Factor (20% weight)
 
