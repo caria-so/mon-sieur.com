@@ -1,0 +1,758 @@
+objectProperties:
+  
+  # =========================================================================
+  # TYPED CORRESPONDENCES - Spiritual Beings
+  # =========================================================================
+  
+  DEITY_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:DEITY_CORRESPONDENCE"
+    label: "deity correspondence"
+    description: "Associates an entity with corresponding deities"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Deity"
+    owl:characteristics:
+      - owl:SymmetricProperty
+    type_modifier: 1.1  # Slightly more important
+    
+  ANGEL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:ANGEL_CORRESPONDENCE"
+    label: "angel correspondence"
+    description: "Associates an entity with its corresponding angel"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Angel"
+    owl:characteristics:
+      - owl:SymmetricProperty
+    rdfs:comment: "Mars ↔ Samael, Tuesday ↔ Samael, etc."
+    type_modifier: 1.2  # Angels slightly more important
+
+  DEMON_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:DEMON_CORRESPONDENCE"
+    label: "demon correspondence"
+    description: "Associates an entity with its corresponding demon"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Demon"
+    owl:characteristics:
+      - owl:SymmetricProperty
+    type_modifier: 1.1
+
+  ELEMENTAL_BEING_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:ELEMENTAL_BEING_CORRESPONDENCE"
+    label: "elemental being correspondence"
+    description: "Associates an entity with its corresponding elemental being"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:ElementalBeing"
+    owl:characteristics:
+      - owl:SymmetricProperty
+    rdfs:comment: "Fire → Salamanders, Water → Undines, Air → Sylphs, Earth → Gnomes"
+
+  # =========================================================================
+  # TYPED CORRESPONDENCES - Physical/Material
+  # =========================================================================
+  
+  METAL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:METAL_CORRESPONDENCE"
+    label: "metal correspondence"
+    description: "Associates an entity with its corresponding metal"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Metal"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Mars ↔ Iron, Venus ↔ Copper, etc."
+    type_modifier: 1.0
+    
+  COLOR_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:COLOR_CORRESPONDENCE"
+    label: "color correspondence"
+    description: "Associates an entity with its corresponding color"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Color"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Mars ↔ Red, Venus ↔ Green, etc."
+    type_modifier: 1.0
+
+  PLANT_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:PLANT_CORRESPONDENCE"
+    label: "plant correspondence"
+    description: "Associates an entity with corresponding plants"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Plant"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+  
+  MINERAL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:MINERAL_CORRESPONDENCE"
+    label: "mineral correspondence"
+    description: "Associates an entity with corresponding minerals"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Mineral"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Broader than metals - includes gems, crystals, etc."
+
+  ANIMAL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:ANIMAL_CORRESPONDENCE"
+    label: "animal correspondence"
+    description: "Associates an entity with corresponding animals"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Animal"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Sun → Lion, Mars → Wolf, etc."
+
+  ALCHEMICAL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:ALCHEMICAL_CORRESPONDENCE"
+    label: "alchemical correspondence"
+    description: "Associates an entity with corresponding alchemical substances"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:AlchemicalSubstance"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty  # Alchemical transformations are transitive
+    rdfs:comment: "Mercury → Quicksilver → Volatility, etc."
+
+  # =========================================================================
+  # TYPED CORRESPONDENCES - Biological/Medical
+  # =========================================================================
+      
+  ANATOMICAL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:ANATOMICAL_CORRESPONDENCE"
+    label: "anatomical correspondence"
+    description: "Associates an entity with the corresponding anatomical part"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:AnatomicalPart"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Mars → Head, Sun → Heart, Moon → Stomach, etc."
+
+  PATHOLOGY_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:PATHOLOGY_CORRESPONDENCE"
+    label: "pathology correspondence"
+    description: "Associates an entity with the corresponding pathology"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Pathology"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Mars → Fevers, Saturn → Chronic illness, etc."
+
+  PHYSIOLOGY_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:PHYSIOLOGY_CORRESPONDENCE"
+    label: "physiology correspondence"
+    description: "Associates an entity with the corresponding physiological function"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Physiology"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Mars → Muscle action, Moon → Digestion, etc."
+
+  PSYCHOLOGICAL_STATE_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:PSYCHOLOGICAL_STATE_CORRESPONDENCE"
+    label: "psychological state correspondence"
+    description: "Associates an entity with the corresponding psychological state"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:PsychologicalState"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Mars → Anger, Venus → Love, Saturn → Melancholy, etc."
+
+  # =========================================================================
+  # TYPED CORRESPONDENCES - Symbolic/Abstract
+  # =========================================================================
+
+  SIGIL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:SIGIL_CORRESPONDENCE"
+    label: "sigil correspondence"
+    description: "Associates an entity with the corresponding sigil or seal"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Sigil"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Planetary sigils, spirit seals, etc."
+
+  SYMBOL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:SYMBOL_CORRESPONDENCE"
+    label: "symbol correspondence"
+    description: "Associates an entity with the corresponding symbol"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Symbol"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Generic symbols beyond sigils"
+
+  MUSICAL_NOTE_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:MUSICAL_NOTE_CORRESPONDENCE"
+    label: "musical note correspondence"
+    description: "Associates an entity with the corresponding musical note"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:MusicalNote"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Pythagorean/Hermetic music of the spheres"
+
+  NUMERICAL_VALUE_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:NUMERICAL_VALUE_CORRESPONDENCE"
+    label: "numerical value correspondence"
+    description: "Associates an entity with the corresponding numerical value"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:NumericalValue"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Saturn → 3, Jupiter → 4, Mars → 5, etc."
+
+  ALPHABETICAL_VALUE_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:ALPHABETICAL_VALUE_CORRESPONDENCE"
+    label: "alphabetical value correspondence"
+    description: "Associates an entity with the corresponding alphabetical value"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:AlphabeticalValue"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Hebrew letters, Greek letters, etc."
+
+  # =========================================================================
+  # TYPED CORRESPONDENCES - Ritual/Practical
+  # =========================================================================
+
+  RITUAL_TOOL_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:RITUAL_TOOL_CORRESPONDENCE"
+    label: "ritual tool correspondence"
+    description: "Associates an entity with the corresponding ritual tool"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:RitualTool"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Fire → Wand, Water → Cup, Air → Sword, Earth → Pentacle"
+
+  RITUAL_FORMULA_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:RITUAL_FORMULA_CORRESPONDENCE"
+    label: "ritual formula correspondence"
+    description: "Associates an entity with the corresponding ritual formula"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:RitualFormula"
+    owl:characteristics:
+      - owl:SymmetricProperty
+    rdfs:comment: "Specific magical operations, spells, workings"
+
+  # =========================================================================
+  # ADDITIONAL CORRESPONDENCES (Consider Adding)
+  # =========================================================================
+  
+  
+  TAROT_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:TAROT_CORRESPONDENCE"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:TarotCard"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+
+  HEBREW_LETTER_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HEBREW_LETTER_CORRESPONDENCE"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:HebrewLetter"
+    owl:characteristics:
+      - owl:SymmetricProperty
+
+  SEPHIROTH_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:SEPHIROTH_CORRESPONDENCE"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Sephirah"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+
+  RUNE_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:RUNE_CORRESPONDENCE"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Rune"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+
+  GEOMANTIC_FIGURE_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:GEOMANTIC_FIGURE_CORRESPONDENCE"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:GeomanticFigure"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+
+  LUNAR_MANSION_CORRESPONDENCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:LUNAR_MANSION_CORRESPONDENCE"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:LunarMansion"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+
+  # =========================================================================
+  # GENERIC CATCH-ALL
+  # =========================================================================
+  
+  HAS_ANALOGY_WITH:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_ANALOGY_WITH"
+    label: "has analogy with"
+    description: "Generic correspondence for entities without specific typed relationship"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Entity"
+    owl:characteristics:
+      - owl:SymmetricProperty
+      - owl:TransitiveProperty
+    rdfs:comment: "Use typed correspondences when possible; this is for miscellaneous analogies"
+
+  # =========================================================================
+  # RULERSHIP HIERARCHY
+  # =========================================================================
+
+  RULES:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:RULES"
+    label: "rules"
+    description: "Indicates that an entity rules or governs another entity"
+    rdfs:domain:
+      - "monsieur:Planet"
+      - "monsieur:Angel"
+    rdfs:range:
+      - "monsieur:ZodiacSign"
+      - "monsieur:WeekDay"
+      - "monsieur:MagicHour"
+    owl:inverseOf: "monsieur:RULED_BY"
+    rdfs:comment: "Primary direction: Mars RULES Aries, Tuesday RULED_BY Mars"
+    inheritance_enabled: true
+    
+  RULED_BY:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:RULED_BY"
+    label: "ruled by"
+    description: "Indicates that an entity is ruled or governed by another entity"
+    rdfs:domain:
+      - "monsieur:ZodiacSign"
+      - "monsieur:WeekDay"
+      - "monsieur:MagicHour"
+    rdfs:range:
+      - "monsieur:Planet"
+      - "monsieur:Angel"
+    owl:inverseOf: "monsieur:RULES"
+    auto_generated: true
+    inheritance_enabled: true
+
+  # =========================================================================
+  # DIGNITIES (Essential for weighting system!)
+  # =========================================================================
+  
+  HAS_DOMICILE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_DOMICILE"
+    label: "has domicile"
+    rdfs:domain: "monsieur:Planet"
+    rdfs:range: "monsieur:ZodiacSign"
+    owl:inverseOf: "monsieur:DOMICILE_OF"
+    dignity_multiplier: 1.5  # ← REQUIRED for weighting system
+   
+  HAS_EXALTATION:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_EXALTATION"
+    rdfs:domain: "monsieur:Planet"
+    rdfs:range: "monsieur:ZodiacSign"
+    owl:inverseOf: "monsieur:EXALTATION_OF"
+    dignity_multiplier: 1.25  # ← REQUIRED for weighting system
+  
+  HAS_DETRIMENT:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_DETRIMENT"
+    rdfs:domain: "monsieur:Planet"
+    rdfs:range: "monsieur:ZodiacSign"
+    owl:inverseOf: "monsieur:DETRIMENT_OF"
+    dignity_multiplier: 0.75  # ← REQUIRED for weighting system
+  
+  HAS_FALL:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_FALL"
+    rdfs:domain: "monsieur:Planet"
+    rdfs:range: "monsieur:ZodiacSign"
+    owl:inverseOf: "monsieur:FALL_OF"
+    dignity_multiplier: 0.5  # ← REQUIRED for weighting system
+
+  # =========================================================================
+  # ASTROLOGY RELATIONSHIPS
+  # =========================================================================
+  
+  HAS_PLANET_MODALITY:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_PLANET_MODALITY"
+    rdfs:domain: "monsieur:Planet"
+    rdfs:range: "monsieur:PlanetModality"
+    owl:inverseOf: "monsieur:PLANET_MODALITY_OF"
+    dignity_multiplier: 1.0  # ← REQUIRED for weighting system
+
+  # =========================================================================
+  # TEMPORAL RELATIONSHIPS
+  # =========================================================================
+
+  IS_PART_OF_DAY:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:IS_PART_OF_DAY"
+    label: "is part of day"
+    description: "Indicates that a magic hour is part of a specific weekday"
+    rdfs:domain: "monsieur:MagicHour"
+    rdfs:range: "monsieur:WeekDay"
+    owl:characteristics:
+      - owl:FunctionalProperty
+    owl:inverseOf: "monsieur:HAS_HOUR"
+    rdfs:comment: "Hour_4_Night_Wednesday IS_PART_OF_DAY Wednesday"
+    
+  HAS_HOUR:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_HOUR"
+    label: "has hour"
+    description: "Indicates that a weekday contains magic hours"
+    rdfs:domain: "monsieur:WeekDay"
+    rdfs:range: "monsieur:MagicHour"
+    owl:inverseOf: "monsieur:IS_PART_OF_DAY"
+    auto_generated: true
+
+  # =========================================================================
+  # ATTRIBUTE PROPERTIES
+  # =========================================================================
+
+  HAS_BASIC_ELEMENT:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_BASIC_ELEMENT"
+    label: "has basic element"
+    description: "Associates an entity with basic elements"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:BasicElement"
+    owl:characteristics:
+      - owl:FunctionalProperty
+    rdfs:comment: "Links entities to fire, earth, air, water, akasha"
+
+  HAS_BASIC_QUALITY:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_BASIC_QUALITY"
+    label: "has basic quality"
+    description: "Associates an entity with basic qualities"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:BasicQuality"
+    rdfs:comment: "Links entities to hot, cold, moist, dry - can have multiple"
+
+  HAS_POLARITY:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_POLARITY"
+    label: "has pole"
+    description: "Associates an entity with positive, negative or neutral polarity"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Polarity"
+    owl:characteristics:
+      - owl:FunctionalProperty
+
+  HAS_TEMPERAMENT:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_TEMPERAMENT"
+    label: "has temperament"
+    description: "Associates an entity with classical temperaments"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Temperament"
+    owl:characteristics:
+      - owl:FunctionalProperty
+    rdfs:comment: "Sanguine, choleric, melancholic, phlegmatic"
+
+  HAS_GENRE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_GENRE"
+    label: "has genre"
+    description: "Associates an entity with classical genres"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Genre"
+    owl:characteristics:
+      - owl:FunctionalProperty
+    rdfs:comment: "Masculine, feminine, neutral, androgynous"
+
+  # =========================================================================
+  # COMPOSITION PROPERTIES
+  # =========================================================================
+
+  MEMBER_OF:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:MEMBER_OF"
+    label: "member of"
+    description: "Indicates an entity is a member of a set or group"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:ConceptSet"
+    owl:inverseOf: "monsieur:HAS_MEMBER"
+    inheritance_enabled: true
+    
+  HAS_MEMBER:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_MEMBER"
+    label: "has member"
+    description: "Indicates a set contains this entity"
+    rdfs:domain: "monsieur:ConceptSet"
+    rdfs:range: "monsieur:Entity"
+    owl:inverseOf: "monsieur:MEMBER_OF"
+    auto_generated: true
+
+# =========================================================================
+  # QUALITY RELATIONSHIPS
+  # =========================================================================
+  
+  COMBINES_WITH:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:COMBINES_WITH"
+    label: "combines with"
+    description: "Two qualities combine to form an element"
+    rdfs:domain: "monsieur:BasicQuality"
+    rdfs:range: "monsieur:BasicQuality"
+    owl:characteristics:
+      - owl:SymmetricProperty
+    rdfs:comment: "Hot + Dry = Fire, Hot + Moist = Air, Cold + Moist = Water, Cold + Dry = Earth"
+
+  OPPOSITE_OF:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:OPPOSITE_OF"
+    label: "opposite of"
+    description: "Indicates polar opposition between qualities, elements, or principles"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Entity"
+    owl:characteristics:
+      - owl:SymmetricProperty
+    rdfs:comment: "Hot ↔ Cold, Dry ↔ Moist, Fire ↔ Water, etc."
+
+  # =========================================================================
+  # HUMORAL THEORY
+  # =========================================================================
+  
+  HAS_HUMOR:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HAS_HUMOR"
+    label: "has humor"
+    description: "Associates an entity with a bodily humor from Hippocratic-Galenic medicine"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Humor"
+    owl:characteristics:
+      - owl:FunctionalProperty  # Each temperament has ONE primary humor
+    rdfs:comment: "Links temperaments to blood, yellow bile, black bile, or phlegm"
+
+  PRODUCES_HUMOR:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:PRODUCES_HUMOR"
+    label: "produces humor"
+    description: "Indicates which bodily humor is produced by an organ or condition"
+    rdfs:domain: "monsieur:Entity"
+    rdfs:range: "monsieur:Humor"
+    rdfs:comment: "Liver produces yellow bile, spleen produces black bile, etc."
+
+  HUMOR_EXCESS:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HUMOR_EXCESS"
+    label: "humor excess"
+    description: "Indicates pathological conditions resulting from humor excess"
+    rdfs:domain: "monsieur:Humor"
+    rdfs:range: "monsieur:Pathology"
+    rdfs:comment: "Too much black bile causes melancholy, too much blood causes fever, etc."
+
+
+
+# =========================================================================
+# KNOWLEDGE SYSTEM RELATIONSHIPS
+# =========================================================================
+  
+  DERIVED_FROM:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:DERIVED_FROM"
+    label: "derived from"
+    description: "Indicates a knowledge system derives from another system"
+    rdfs:domain: "monsieur:KnowledgeSystem"
+    rdfs:range: "monsieur:KnowledgeSystem"
+    owl:characteristics:
+      - owl:TransitiveProperty
+    rdfs:comment: "GoldenDawn → Hermeticism → Ancient Egypt (transitive)"
+  
+  INFLUENCED_BY:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:INFLUENCED_BY"
+    label: "influenced by"
+    description: "Indicates a knowledge system was influenced by another"
+    rdfs:domain: "monsieur:KnowledgeSystem"
+    rdfs:range: "monsieur:KnowledgeSystem"
+    rdfs:comment: "Weaker relationship than DERIVED_FROM - shows influence without direct lineage"
+  
+  PRIMARY_SOURCE:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:PRIMARY_SOURCE"
+    label: "primary source"
+    description: "Indicates the foundational texts of a knowledge system"
+    rdfs:domain: "monsieur:KnowledgeSystem"
+    rdfs:range: "monsieur:Evidence"
+    rdfs:comment: "Links systems to their key grimoires, texts, and documents"
+  
+  HISTORICAL_PERIOD:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:HISTORICAL_PERIOD"
+    label: "historical period"
+    description: "Associates a knowledge system with its historical time period"
+    rdfs:domain: "monsieur:KnowledgeSystem"
+    rdfs:range: "monsieur:TimePeriod"
+  
+  GEOGRAPHICAL_ORIGIN:
+    rdf:type: owl:ObjectProperty
+    uri: "monsieur:GEOGRAPHICAL_ORIGIN"
+    label: "geographical origin"
+    description: "Associates a knowledge system with its place of origin"
+    rdfs:domain: "monsieur:KnowledgeSystem"
+    rdfs:range: "monsieur:Region"
+
+# ============================================================================
+# PROCESSING METADATA
+# ============================================================================
+
+processing_rules:
+  auto_inverse_pairs:
+    - [RULES, RULED_BY]
+    - [HAS_DOMICILE, DOMICILE_OF]
+    - [HAS_EXALTATION, EXALTATION_OF]
+    - [HAS_DETRIMENT, DETRIMENT_OF]
+    - [HAS_FALL, FALL_OF]
+    - [IS_PART_OF_DAY, HAS_HOUR]
+    - [MEMBER_OF, HAS_MEMBER]
+  
+  symmetric_properties:
+    # Correspondence properties
+    - METAL_CORRESPONDENCE
+    - COLOR_CORRESPONDENCE
+    - ANGEL_CORRESPONDENCE
+    - DEMON_CORRESPONDENCE
+    - DEITY_CORRESPONDENCE
+    - ELEMENTAL_BEING_CORRESPONDENCE
+    - PLANT_CORRESPONDENCE
+    - MINERAL_CORRESPONDENCE
+    - ANIMAL_CORRESPONDENCE
+    - ALCHEMICAL_CORRESPONDENCE
+    - ANATOMICAL_CORRESPONDENCE
+    - PATHOLOGY_CORRESPONDENCE
+    - PHYSIOLOGY_CORRESPONDENCE
+    - PSYCHOLOGICAL_STATE_CORRESPONDENCE
+    - SIGIL_CORRESPONDENCE
+    - SYMBOL_CORRESPONDENCE
+    - MUSICAL_NOTE_CORRESPONDENCE
+    - NUMERICAL_VALUE_CORRESPONDENCE
+    - ALPHABETICAL_VALUE_CORRESPONDENCE
+    - RITUAL_TOOL_CORRESPONDENCE
+    - RITUAL_FORMULA_CORRESPONDENCE
+    - HAS_ANALOGY_WITH
+    # Quality and principle properties
+    - COMBINES_WITH
+    - OPPOSITE_OF
+  
+  transitive_properties:
+    # Material correspondences (substitution chains)
+    - METAL_CORRESPONDENCE           # Mars → Iron → Steel → Sword
+    - MINERAL_CORRESPONDENCE         # Mars → Iron → Hematite → Bloodstone
+    - PLANT_CORRESPONDENCE           # Mars → Nettle → Nettle Seeds → Nettle Root
+    - ANIMAL_CORRESPONDENCE          # Mars → Wolf → Wolf Hair → Wolf Tooth
+    - ALCHEMICAL_CORRESPONDENCE      # Mars → Iron → Vitriol → Red Lion
+    - COLOR_CORRESPONDENCE           # Mars → Red → Scarlet → Crimson
+    # Symbolic correspondences
+    - SYMBOL_CORRESPONDENCE          # Mars → ♂ → Spear → †
+    - NUMERICAL_VALUE_CORRESPONDENCE # Mars → 5 → Pentagon → 5-pointed Star
+    - MUSICAL_NOTE_CORRESPONDENCE    # Mars → C → C# → Middle C
+    - SIGIL_CORRESPONDENCE           # Mars Kamea → Sigil → Seal variant
+    - RITUAL_TOOL_CORRESPONDENCE     # Fire → Wand → Staff → Rod
+    # Biological correspondences
+    - ANATOMICAL_CORRESPONDENCE      # Mars → Head → Brain → Frontal Lobe
+    - PATHOLOGY_CORRESPONDENCE       # Mars → Fever → Inflammation → Infection
+    - PHYSIOLOGY_CORRESPONDENCE      # Mars → Muscle → Contraction → Movement
+    - PSYCHOLOGICAL_STATE_CORRESPONDENCE # Mars → Anger → Rage → Wrath
+    # Generic catch-all
+    - HAS_ANALOGY_WITH               # Generic transitive correspondence
+    # System relationships
+    - DERIVED_FROM                   # GoldenDawn → Hermeticism → Ancient Egypt
+  
+  inheritance_chains:
+    # Planetary correspondences flow down
+    - Planet -> (RULES) -> ZodiacSign
+    - Planet -> (RULES) -> WeekDay -> (HAS_HOUR) -> MagicHour
+    # Set membership inheritance
+    - ConceptSet -> (HAS_MEMBER) -> Entity
+    # System lineage inheritance
+    - KnowledgeSystem -> (DERIVED_FROM) -> KnowledgeSystem
+  
+  functional_properties:
+    # Each entity has ONE value for these
+    - HAS_BASIC_ELEMENT              # One primary element
+    - HAS_POLE                       # One polarity
+    - HAS_TEMPERAMENT                # One primary temperament
+    - HAS_HUMOR                      # One primary humor
+    - IS_PART_OF_DAY                 # Each hour belongs to exactly one day
+
+  non_transitive_correspondences:
+    # These should NOT be transitive (discrete beings)
+    - DEITY_CORRESPONDENCE           # Mars → Ares, Zeus → Ares ≠ Mars → Zeus
+    - ANGEL_CORRESPONDENCE           # Mars → Samael ≠ Sun → Michael
+    - DEMON_CORRESPONDENCE           # Unique entities, not substitutable
+    - ELEMENTAL_BEING_CORRESPONDENCE # Salamanders ≠ Undines
+    - RITUAL_FORMULA_CORRESPONDENCE  # Specific operations, not chains
+
+#--------------------------------------------
+# NOTES ON TRANSITIVITY
+#--------------------------------------------
+# 
+# Transitive properties enable substitution magic:
+#   If A → B and B → C, then A → C
+#   Therefore: C can substitute for A in magical practice
+#
+# Example chains:
+#   Mars → Iron → Rust → Red Ochre → Blood → Vitality
+#   One → Kether → White → Dove → Peace
+#   Fire → Wand → Oak Wand → Carved Staff
+#
+# Non-transitive properties represent unique entities:
+#   Mars → Samael (angel), Michael → Sun
+#   Does NOT mean Mars → Sun (they're distinct!)
+#
+# Functional properties (one value only):
+#   Mars HAS_POLE Positive (can't also be Negative)
+#   Each hour IS_PART_OF_DAY one weekday (not multiple)
+#--------------------------------------------
