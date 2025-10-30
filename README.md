@@ -1,9 +1,10 @@
-# Monsieur.so - Comprehensive Astrological Knowledge System
+# Monsieur.so
 
 # Overview
-Monsieur.so is a sophisticated web application that combines astronomical calculations, astrological knowledge, and hermetic philosophy into an interactive knowledge graph system. It's essentially a digital implementation of traditional astrological and magical practices, powered by modern computational astronomy and graph database technology.
+Monsieur.so is a web application that infuses astronomy and artificial intelligence into the three pillars of traditional knowledge: Astrology, Alchemy, and Magic.
 
 ## Core Functionality
+At its core, it’s an interactive knowledge graph that brings together astronomical calculations, astrological correspondences, and hermetic philosophy. Think of it as a digital implementation of traditional astrological and magical practices—reimagined through modern computational astronomy and graph database technology. 
 
 1. Astronomical & Astrological Calculations
 Real-time Planetary Positions: Calculates precise positions of all planets (including outer planets) using the Swiss Ephemeris and Skyfield libraries
